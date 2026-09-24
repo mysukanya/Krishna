@@ -1,10 +1,15 @@
 # Krishna: Autonomous Agentic AI System for Goal-Driven Task Execution
 
+[![Live Demo on Netlify](https://img.shields.io/badge/Live_Demo-Netlify-00ad9f.svg?style=flat&logo=netlify)](https://krishna-autonomous.netlify.app)
+[![GitHub Repository](https://img.shields.io/badge/GitHub-mysukanya%2FKrishna-181717.svg?style=flat&logo=github)](https://github.com/mysukanya/Krishna)
 [![Python 3.11+](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.115+-009688.svg)](https://fastapi.tiangolo.com)
 [![Pydantic v2](https://img.shields.io/badge/Pydantic-v2.8+-e92063.svg)](https://docs.pydantic.dev/)
 [![ChromaDB](https://img.shields.io/badge/ChromaDB-Vector_Memory-fc60a8.svg)](https://www.trychroma.com)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+> **Live Deployment:** [https://krishna-autonomous.netlify.app](https://krishna-autonomous.netlify.app)  
+> **Source Repository:** [https://github.com/mysukanya/Krishna](https://github.com/mysukanya/Krishna)
 
 **Krishna** is a production-grade autonomous AI system that transitions beyond standard conversational chatbots into a verified, **goal-driven execution loop**. Given an ambiguous, high-level goal, Krishna decomposes it into structured plan steps, queries long-term vector memory, invokes sandboxed tools, observes empirical outputs, performs rigorous condition validation, and dynamically replans upon error detection.
 
