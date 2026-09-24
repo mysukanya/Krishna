@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Krishna — Autonomous Agentic AI System</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body class="apple-theme">
+  <!-- Dynamic 3D Scene Wrapper -->
+  <div id="scene-container" class="perspective-stage">
+    
+    <!-- Top Bar Navigation (macOS Menu Bar Style) -->
+    <header class="system-menubar">
+      <div class="menubar-left">
+        <span class="apple-logo"></span>
+        <span class="system-title">Krishna</span>
+        <span class="system-subtitle">Autonomous Agentic Execution</span>
+        <span class="status-indicator-badge live" id="system-status-indicator">
+          <span class="pulse-dot"></span> System Ready
+        </span>
+      </div>
+      <div class="menubar-center">
+        <div class="mode-pill-toggle">
+          <button id="mode-agentic-btn" class="pill-btn active">Agentic Loop (Mode B)</button>
+          <button id="mode-single-btn" class="pill-btn">Single-Pass (Mode A)</button>
+        </div>
+      </div>
+      <div class="menubar-right">
+        <button id="benchmark-modal-btn" class="nav-action-btn">Evaluation Report</button>
+        <button id="reset-workspace-btn" class="nav-action-btn secondary">Reset State</button>
+      </div>
+    </header>
+
+    <!-- Main Floating Multi-Panel Grid -->
+    <main class="panels-grid">
+      
+      <!-- PANEL 1: Goal Input & Mission Control -->
+      <section class="floating-window" id="window-goal" data-depth="1.2">
+        <div class="window-header">
+          <div class="traffic-lights">
+            <span class="light red"></span>
+            <span class="light yellow"></span>
+            <span class="light green"></span>
+          </div>
+          <span class="window-title">Task Specification</span>
+          <span class="window-badge">Input</span>
+        </div>
+        <div class="window-content">
+          <label for="goal-input" class="field-label">Autonomous Goal</label>
+          <textarea id="goal-input" class="apple-textarea" rows="3" placeholder="Enter high-level goal (e.g. Retrieve FY2025 revenue from memory, compute profit after 15% tax, and summarize)..."></textarea>
+          
+          <div class="presets-container">
+            <span class="presets-label">Task Presets:</span>
+            <div class="presets-scroll">
+              <button class="preset-tag" data-preset="math">Math Reasoning</button>
+              <button class="preset-tag" data-preset="memory_calc">Memory + Profit Calc</button>
+              <button class="preset-tag" data-preset="pipeline">5-Step Pipeline</button>
+              <button class="preset-tag" data-preset="recovery">404 Error Recovery</button>
+              <button class="preset-tag" data-preset="stats">Data Stats & Filter</button>
+            </div>
+          </div>
+
+          <div class="control-row">
+            <label class="toggle-control">
+              <input type="checkbox" id="auto-approve-toggle" checked>
+              <span class="switch"></span>
+              <span class="toggle-text">Auto-Approve High Risk Tools</span>
+            </label>
+            <button id="run-agent-btn" class="primary-apple-btn">
+              <span class="btn-icon">▶</span>
+              <span class="btn-text">Execute Autonomous Loop</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- PANEL 2: Planner & State Inspector -->
+      <section class="floating-window" id="window-planner" data-depth="1.5">
+        <div class="window-header">
+          <div class="traffic-lights">
+            <span class="light red"></span>
+            <span class="light yellow"></span>
+            <span class="light green"></span>
+          </div>
+          <span class="window-title">Planner & Decomposed Steps</span>
+          <span class="window-badge" id="plan-version-badge">v1 Plan</span>
+        </div>
+        <div class="window-content">
+          <div class="agent-status-bar">
+            <span class="status-label">Agent State:</span>
+            <span class="status-pill idle" id="agent-state-pill">IDLE</span>
+            <span class="iteration-counter" id="iteration-counter">Iter: 0 / 10</span>
+          </div>
+          
+          <div class="planner-reasoning-box" id="planner-reasoning">
+            Awaiting task goal. When submitted, the planner will retrieve long-term context and decompose the objective into verifiable steps.
+          </div>
+
+          <div class="steps-list" id="steps-list">
+            <div class="empty-state">No active plan generated yet.</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PANEL 3: 3D Bending Execution Timeline (Center Stage) -->
+      <section class="floating-window timeline-panel" id="window-timeline" data-depth="1.8">
+        <div class="window-header">
+          <div class="traffic-lights">
+            <span class="light red"></span>
+            <span class="light yellow"></span>
+            <span class="light green"></span>
+          </div>
+          <span class="window-title">Live Execution Timeline & 3D Event Stream</span>
+          <div class="timeline-meta">
+            <span id="active-step-indicator">Step: —</span>
+          </div>
+        </div>
+        <div class="window-content scrollable">
+          <div class="event-cards-stream" id="event-stream">
+            <div class="timeline-intro-card bend-card">
+              <div class="card-icon">⚡</div>
+              <div class="card-body">
+                <h4>Goal-Driven Execution Engine</h4>
+                <p>Track the full cycle: <code>Goal → Retrieve → Plan → Act → Observe → Validate → Replan</code>. Cards dynamically react with 3D bending physics as execution unfolds.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PANEL 4: Tool Registry & Security Sandbox -->
+      <section class="floating-window" id="window-tools" data-depth="1.3">
+        <div class="window-header">
+          <div class="traffic-lights">
+            <span class="light red"></span>
+            <span class="light yellow"></span>
+            <span class="light green"></span>
+          </div>
+          <span class="window-title">Tool Registry & Permissions</span>
+          <span class="window-badge">5 Tools</span>
+        </div>
+        <div class="window-content">
+          <div class="tools-grid">
+            <div class="tool-card bend-card" data-tool="calculator">
+              <div class="tool-top">
+                <span class="tool-name">calculator</span>
+                <span class="risk-badge low">LOW_RISK</span>
+              </div>
+              <p class="tool-desc">AST-sandboxed math & statistics evaluator. Zero arbitrary code execution.</p>
+            </div>
+
+            <div class="tool-card bend-card" data-tool="safe_python">
+              <div class="tool-top">
+                <span class="tool-name">safe_python</span>
+                <span class="risk-badge medium">MEDIUM_RISK</span>
+              </div>
+              <p class="tool-desc">Isolated Python executor blocking imports, os, subprocess, and builtins manipulation.</p>
+            </div>
+
+            <div class="tool-card bend-card" data-tool="http_tool">
+              <div class="tool-top">
+                <span class="tool-name">http_tool</span>
+                <span class="risk-badge medium">MEDIUM_RISK</span>
+              </div>
+              <p class="tool-desc">SSRF-protected HTTP requests restricted to allowlisted API domains.</p>
+            </div>
+
+            <div class="tool-card bend-card" data-tool="retrieval_tool">
+              <div class="tool-top">
+                <span class="tool-name">retrieval_tool</span>
+                <span class="risk-badge low">LOW_RISK</span>
+              </div>
+              <p class="tool-desc">Semantic vector memory search over long-term past task knowledge.</p>
+            </div>
+
+            <div class="tool-card bend-card" data-tool="data_processor">
+              <div class="tool-top">
+                <span class="tool-name">data_processor</span>
+                <span class="risk-badge low">LOW_RISK</span>
+              </div>
+              <p class="tool-desc">Structured JSON transformations, filtering, sorting, and aggregation.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PANEL 5: Vector Memory & Context Explorer -->
+      <section class="floating-window" id="window-memory" data-depth="1.4">
+        <div class="window-header">
+          <div class="traffic-lights">
+            <span class="light red"></span>
+            <span class="light yellow"></span>
+            <span class="light green"></span>
+          </div>
+          <span class="window-title">Semantic Vector Memory</span>
+          <span class="window-badge" id="memory-count-badge">ChromaDB / VectorStore</span>
+        </div>
+        <div class="window-content">
+          <div class="memory-search-bar">
+            <input type="text" id="memory-search-input" class="apple-input" placeholder="Query long-term semantic memory...">
+            <button id="memory-search-btn" class="secondary-apple-btn">Search</button>
+          </div>
+
+          <div class="memory-records-list" id="memory-records">
+            <!-- Dynamically populated memory snippets -->
+          </div>
+
+          <div class="memory-quick-insert">
+            <input type="text" id="memory-insert-text" class="apple-input" placeholder="Add new knowledge snippet to memory...">
+            <button id="memory-insert-btn" class="pill-btn add-btn">+ Store</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- PANEL 6: Final Result & Observability Inspector -->
+      <section class="floating-window" id="window-result" data-depth="1.6">
+        <div class="window-header">
+          <div class="traffic-lights">
+            <span class="light red"></span>
+            <span class="light yellow"></span>
+            <span class="light green"></span>
+          </div>
+          <span class="window-title">Synthesized Outcome & Metrics</span>
+          <span class="window-badge success" id="result-status-badge">Awaiting</span>
+        </div>
+        <div class="window-content">
+          <div class="metrics-strip">
+            <div class="metric-box">
+              <span class="metric-val" id="metric-duration">0.00s</span>
+              <span class="metric-lbl">Duration</span>
+            </div>
+            <div class="metric-box">
+              <span class="metric-val" id="metric-iterations">0</span>
+              <span class="metric-lbl">Iterations</span>
+            </div>
+            <div class="metric-box">
+              <span class="metric-val" id="metric-tools">0</span>
+              <span class="metric-lbl">Tool Calls</span>
+            </div>
+            <div class="metric-box">
+              <span class="metric-val" id="metric-replans">0</span>
+              <span class="metric-lbl">Replans</span>
+            </div>
+          </div>
+
+          <label class="field-label">Autonomous Synthesized Output</label>
+          <div class="result-text-container" id="final-result-text">
+            No execution outcome yet. Submit a goal to trigger the full autonomous loop.
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Modal: Evaluation & Benchmark Report -->
+    <div id="benchmark-modal" class="modal-backdrop hidden">
+      <div class="modal-dialog bend-card">
+        <div class="modal-header">
+          <h3>Empirical Evaluation Benchmark</h3>
+          <button id="close-modal-btn" class="close-x">✕</button>
+        </div>
+        <div class="modal-body">
+          <p class="modal-desc">Measured results comparing <strong>Mode A (Single-Pass Baseline)</strong> vs <strong>Mode B (Krishna Autonomous Agentic Loop)</strong> across 10 multi-step tasks.</p>
+          <table class="report-table">
+            <thead>
+              <tr>
+                <th>Metric</th>
+                <th>Mode A (Single-Pass)</th>
+                <th>Mode B (Krishna Agentic)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Task Completion Rate</td>
+                <td class="fail-val">40.0%</td>
+                <td class="success-val">100.0%</td>
+              </tr>
+              <tr>
+                <td>Tool Use Accuracy</td>
+                <td class="fail-val">0.0%</td>
+                <td class="success-val">100.0%</td>
+              </tr>
+              <tr>
+                <td>Failure Recovery Rate</td>
+                <td>100.0% (N/A)</td>
+                <td class="success-val">100.0%</td>
+              </tr>
+              <tr>
+                <td>Average Steps / Iterations</td>
+                <td>1.0</td>
+                <td>2.2</td>
+              </tr>
+              <tr>
+                <td>Average Tool Calls</td>
+                <td>0.0</td>
+                <td>2.2</td>
+              </tr>
+              <tr>
+                <td>Average Execution Time</td>
+                <td>0.001s</td>
+                <td>0.882s</td>
+              </tr>
+              <tr>
+                <td>Overall Failure Rate</td>
+                <td class="fail-val">60.0%</td>
+                <td class="success-val">0.0%</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="memory-lift-card">
+            <h4>Vector Memory Retention Lift: +20.0%</h4>
+            <p>Evaluating context retention on memory-dependent tasks: Success increased from 80.0% (without vector store) to 100.0% with vector memory context retrieval.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

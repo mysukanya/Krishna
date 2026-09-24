@@ -1,0 +1,34 @@
+# Environments & Virtualenvs
+.venv/
+env/
+venv/
+ENV/
+
+# Python cache & artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.pytest_cache/
+.coverage
+htmlcov/
+dist/
+build/
+*.egg-info/
+
+# Local sensitive configuration
+.env
+*.local.env
+
+# Vector database local data
+data/chromadb/
+data/*.db
+data/*.sqlite
+
+# Node / Frontend
+node_modules/
+.netlify/
+
+# OS artifacts
+.DS_Store
+Thumbs.db
